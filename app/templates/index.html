@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% for movie in movies %}
+    <div class="col-md-4">
+      <div class="card mb-4">
+        {% if movie.image %}
+          <img src="{{ url_for('static', filename='images/' + movie.image) }}" class="card-img-top">
+        {% endif %}
+        <div class="card-body">
+          <h1 class="card-title display-6">{{ movie.title }}</h1>
+          <p class="card-text">{{ movie.description|truncate(200) }}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <a href="{{ url_for('movie', id=movie.id) }}" class="btn btn-lg btn-outline-secondary">К отзывам</a>
+            </div>
+            <small class="text-muted">
+              {% if movie.reviews %}
+                Отзывов: {{ movie.reviews|length }}
+              {% else %}
+                Отзывов еще нет
+              {% endif %}
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <p class="lead">Тут пусто</p>
+  {% endfor %}
+{% endblock content %}

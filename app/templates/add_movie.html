@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1 class="mt-3 display-4">Добавить фильм</h1>
+  <form method="POST" action="" enctype="multipart/form-data" novalidate>
+    {{ form.csrf_token }}
+    <div class="mb-3">
+      <label>
+        {{ form.title.label }}
+      </label>
+      {{ form.title(class="form-control") }}
+    </div>
+    {% for error in form.title.errors %}
+    <div class="alert alert-danger" role="alert">
+      <span>{{ error }}</span>
+    </div>
+    {% endfor %}
+    <div class="mb-3">
+      <label>
+        {{ form.description.label }}
+      </label>
+      {{ form.description(class="form-control", rows="5") }}
+    </div>
+    {% for error in form.description.errors %}
+    <div class="alert alert-danger" role="alert">
+      <span>{{ error }}</span>
+    </div>
+    {% endfor %}
+    <div class="form-group mb-3">
+      <label>
+        {{ form.image.label }}
+      </label>
+      {{ form.image(class="form-control") }}
+    </div>
+    {% for error in form.image.errors %}
+      <div class="alert alert-danger" role="alert">
+        <span>{{ error }}</span>
+      </div>
+    {% endfor %}
+    <div class="mb-3">
+      {{ form.submit(class="btn btn-lg btn-outline-secondary") }}
+    </div>
+  </form>
+{% endblock content %}
